@@ -1,6 +1,12 @@
+import sys
+import os
+
+# Add the root directory to the Python path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../')))
+
 import unittest
 import pandas as pd
-from scripts import load_and_clean_data, summarize_statistics
+from scripts.data_processing import load_and_clean_data, summarize_statistics
 
 class TestSolarDataAnalysis(unittest.TestCase):
 
@@ -30,8 +36,8 @@ class TestSolarDataAnalysis(unittest.TestCase):
         """
         stats = summarize_statistics(self.test_df)
         # Check that the summary statistics are correct
-        self.assertAlmostEqual(stats["GHI"]["mean"], 300, places=2, msg="GHI mean is incorrect.")
-        self.assertAlmostEqual(stats["DNI"]["mean"], 200, places=2, msg="DNI mean is incorrect.")
+        self.assertAlmostEqual(stats["GHI"], 300, places=2, msg="GHI mean is incorrect.")
+        self.assertAlmostEqual(stats["DNI"], 200, places=2, msg="DNI mean is incorrect.")
 
     def test_country_column_exists(self):
         """
