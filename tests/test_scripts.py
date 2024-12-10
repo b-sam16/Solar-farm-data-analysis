@@ -1,6 +1,6 @@
 import unittest
 import pandas as pd
-from src.scripts import load_and_clean_data, summarize_statistics
+from scripts import load_and_clean_data, summarize_statistics
 
 class TestSolarDataAnalysis(unittest.TestCase):
 
