@@ -1,36 +1,36 @@
-name: Run Unit Tests
+name: Python CI
 
 on:
   push:
     branches:
       - main
-      - task-1
   pull_request:
     branches:
       - main
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
-
+    
     steps:
-    # Step 1: Checkout the code from the repository
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      # Step 1: Check out the code
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    # Step 2: Set up Python environment
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10.5' # Specify your Python version
+      # Step 2: Set up Python (specify the version you need)
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
 
-    # Step 3: Install dependencies
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
+      # Step 3: Install dependencies (including pytest)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest  # Install pytest explicitly
 
-    # Step 4: Run Unit Tests
-    - name: Run Tests
-      run: |
-        pytest tests/ --disable-warnings
+      # Step 4: Run tests using pytest
+      - name: Run tests
+        run: |
+          pytest tests/ --disable-warnings
